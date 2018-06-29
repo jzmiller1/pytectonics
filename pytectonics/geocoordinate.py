@@ -1,5 +1,6 @@
 from math import sqrt, cos, sin, asin
 from pytectonics.utils import toSpherical, toCartesian
+from numpy import asarray, sqrt, dot, cos, sin, array
 
 class GeoCoordinate:
     _idCounter = 0
@@ -23,7 +24,7 @@ class GeoCoordinate:
     spherical = property(_getSpherical, _setSpherical)
     
     def _getCartesian(self):
-        if not self._cartesian: 
+        if self._cartesian is None:
             self._cartesian = toCartesian(self._spherical)
         return self._cartesian
     def _setCartesian(self, cartesian):
@@ -42,10 +43,30 @@ class GeoCoordinate:
                              cos(lat1) * cos(lat2) * sin(lonChange/2) ** 2))
     def getDistance(self, other):
         '''Returns distance between two points '''
-        return (self.cartesian - other).mag
+        x = self.cartesian - other
+        return sqrt(x.dot(x))
     def rotate(self, angularSpeed, eulerPole, inPlace=True):
-        rotated = self.cartesian.rotate(angularSpeed, 
-                                         axis=eulerPole.astuple())
+        def rotation_matrix(axis, theta):
+            """
+            Return the rotation matrix associated with counterclockwise rotation about
+            the given axis by theta radians.
+
+            From:
+            https://stackoverflow.com/questions/6802577/rotation-of-3d-vector
+            """
+            axis = asarray(axis)
+            axis = axis / sqrt(dot(axis, axis))
+            a = cos(theta / 2.0)
+            b, c, d = -axis * sin(theta / 2.0)
+            aa, bb, cc, dd = a * a, b * b, c * c, d * d
+            bc, ad, ac, ab, bd, cd = b * c, a * d, a * c, a * b, b * d, c * d
+            return array([[aa + bb - cc - dd, 2 * (bc + ad), 2 * (bd - ac)],
+                             [2 * (bc - ad), aa + cc - bb - dd, 2 * (cd + ab)],
+                             [2 * (bd + ac), 2 * (cd - ab), aa + dd - bb - cc]])
+
+        axis = eulerPole
+        theta = angularSpeed
+        rotated = dot(rotation_matrix(axis, theta), self.cartesian)
         if inPlace:
             self.cartesian = rotated
         else:

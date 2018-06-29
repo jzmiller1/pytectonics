@@ -2,6 +2,7 @@ from math import pi
 from pytectonics import GeoCoordinate, Crust
 from pytectonics.utils import toCartesian, moment
 import random
+from numpy import sqrt
 
 
 class Plate(GeoCoordinate):
@@ -30,11 +31,10 @@ class Plate(GeoCoordinate):
     
     def _getVelocity(self):
         velocity = self.eulerPole
-        velocity.mag = self.speed
         return velocity
     def _setVelocity(self, velocity):
-        self.eulerPole = velocity.norm()
-        self.speed = velocity.mag
+        """Removed...never used in coverage."""
+        pass
     velocity = property(_getVelocity, _setVelocity)
     
     def _getCollidable(self):
@@ -149,10 +149,9 @@ class Plate(GeoCoordinate):
         return speed / smallCircleRadius
     def move(self, timestep):
         angularSpeed = self.getAngularSpeed(timestep)
-        
         self.rotate(angularSpeed, self.eulerPole)
-        self.grid.frame.rotate(angle=angularSpeed, 
-                               axis=self.eulerPole.astuple())
+        self.grid.frame.rotate(angle=angularSpeed,
+                               axis=self.eulerPole)
     
     def isDockRequested(self, crust):
         return crust in self._docking

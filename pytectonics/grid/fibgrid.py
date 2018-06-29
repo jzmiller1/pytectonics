@@ -1,6 +1,6 @@
 from math import log, sqrt, pi, sin, cos, asin
 from cartesianarray import CartesianArray
-from pytectonics.utils import sign, CIRCLE, SEMICIRCLE, sqrt5, phi, getLonDistance, fib, bound, toCartesian, toSpherical
+from pytectonics.utils import CIRCLE, SEMICIRCLE, sqrt5, phi, getLonDistance, fib, bound, toCartesian, toSpherical
 from visual import frame
 
 class FibGrid:
