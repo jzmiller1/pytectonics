@@ -25,29 +25,18 @@ world = World(radius=6367, resolution=360/5,
               continentNum=3, continentSize=1250,
               Grid=FibGrid)
     
-#initialize GUI
-#initialize render window
-view = View(world, projection=GlobeProjection(), style=debugStyle)
-
-#view.speedLabel.action = lambda: view.updateSpeed()
-
-view.viewMenu.items.append(('Satellite', lambda: view.setStyle(satelliteStyle))) 
-view.viewMenu.items.append(('Relief',    lambda: view.setStyle(reliefStyle))) 
-view.viewMenu.items.append(('Thickness', lambda: view.setStyle(thicknessStyle))) 
-view.viewMenu.items.append(('Debug',     lambda: view.setStyle(debugStyle)))
-
-view.projectionMenu.items.append(('Map',  lambda: view.setProjection(MapProjection())))
-view.projectionMenu.items.append(('Globe',lambda: view.setProjection(GlobeProjection())))
-
 def main():
     while True:
-        view.update()
-        timestep = (view.speedSlider.value)
+        timestep = 1.0
         if timestep:
             world.update(timestep)
+            plate = world.plates[0]
+            print("STEP")
+            print([toSpherical(point) for point in plate.grid.points[0:3]])
+            print(plate._cartesian)
+            print(plate._spherical)
 def benchmark():
     for i in xrange(50):
-        view.update()
         world.update(1.0)
         
         
