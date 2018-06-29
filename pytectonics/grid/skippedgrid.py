@@ -1,5 +1,4 @@
-from math import sin, cos, asin, pi, sqrt, log, floor
-from scipy.constants import golden #golden ratio
+from math import pi
 import itertools
 
 def sign(n):

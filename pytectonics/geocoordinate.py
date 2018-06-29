@@ -1,5 +1,5 @@
-from math import *
-from pytectonics.utils import *
+from math import sqrt, cos, sin, asin
+from pytectonics.utils import toSpherical, toCartesian
 
 class GeoCoordinate:
     _idCounter = 0

@@ -1,6 +1,5 @@
-from pytectonics.utils import *
+from pytectonics.utils import toSpherical, moment
 from pytectonics import GeoCoordinate
-from visual import vector
 
 class Crust(GeoCoordinate):
     def __init__(self, plate, world, isContinent=False, id=None):

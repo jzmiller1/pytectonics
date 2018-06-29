@@ -1,8 +1,7 @@
-from math import sin, cos, asin, log
-from itertools import product
+from math import log, sqrt, pi, sin, cos, asin
 from cartesianarray import CartesianArray
-from pytectonics.utils import *
-from visual import frame, vector
+from pytectonics.utils import sign, CIRCLE, SEMICIRCLE, sqrt5, phi, getLonDistance, fib, bound, toCartesian, toSpherical
+from visual import frame
 
 class FibGrid:
     '''Represents a grid of evenly distributed cells upon a sphere.

@@ -15,7 +15,9 @@
    x Take density of rock into account
 '''
 
-from pytectonics import *
+from pytectonics.world import World
+from pytectonics.utils import toSpherical
+from pytectonics.grid.fibgrid import FibGrid
 import cProfile
 
 #initialize world

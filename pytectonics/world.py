@@ -1,5 +1,5 @@
 from pytectonics import Plate, Crust, GeoCoordinate, Hotspot, FibGrid
-from pytectonics.utils import *
+from pytectonics.utils import toCartesian
 from math import sqrt, pi, asin
 import random
 

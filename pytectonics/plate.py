@@ -1,9 +1,8 @@
-from math import pi, cos, asin
+from math import pi
 from pytectonics import GeoCoordinate, Crust
-from pytectonics.utils import *
-from visual import vector
+from pytectonics.utils import toCartesian, moment
 import random
-from collections import defaultdict
+
 
 class Plate(GeoCoordinate):
     landElevation=800

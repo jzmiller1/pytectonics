@@ -1,6 +1,5 @@
-from math import pi
 import numpy
-from pytectonics.utils import *
+from pytectonics.utils import SEMICIRCLE, RIGHT_ANGLE, CIRCLE, bound
 
 class CartesianArray:
     """Not to be confused with a *Grid class.
