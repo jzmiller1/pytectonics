@@ -1,7 +1,7 @@
 from math import log, sqrt, pi, sin, cos, asin
 from cartesianarray import CartesianArray
 from pytectonics.utils import CIRCLE, SEMICIRCLE, sqrt5, phi, getLonDistance, fib, bound, toCartesian, toSpherical
-from visual import frame
+from myframe import MyFrame
 
 class FibGrid:
     '''Represents a grid of evenly distributed cells upon a sphere.
@@ -49,7 +49,7 @@ class FibGrid:
                 mapping.array[i,j] = self._getIndex((lat, lon))
         self.mapping = mapping
                 
-        self.frame = frame(visible = False)
+        self.frame = MyFrame()
         
         self.points = [None for i in xrange(0, self.totalPointNum)]
         for i in self.getIndices():
@@ -80,7 +80,9 @@ class FibGrid:
     def getSphericalIndex(self, spherical):
         return self.getCartesianIndex(toCartesian(spherical))
     def getCartesianIndex(self, cartesian):
-        spherical = toSpherical(self.frame.world_to_frame(cartesian))
+        # world_to_frame converts world coordinates to frame coordinates
+        cart_world_to_frame = self.frame.world_to_frame(cartesian)
+        spherical = toSpherical(cart_world_to_frame)
         return int(self.mapping.array[self.mapping.posToId(spherical)])
     def _getIndex(self, (lat, lon)):
         '''Returns the approximate index of the coordinates given.
