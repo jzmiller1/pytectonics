@@ -9,7 +9,7 @@ class CartesianArray:
         assert len(shape)>=2
         self.numLat = int(shape[0]) 
         self.numLon = int(shape[1])
-        self.array = numpy.zeros(shape)
+        self.array = numpy.zeros([int(x) for x in shape])
     def idToPos(self, (i,j)):
         return float(i)/self.numLat * SEMICIRCLE - RIGHT_ANGLE, \
                float(j)/self.numLon * CIRCLE
