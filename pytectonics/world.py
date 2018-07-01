@@ -1,4 +1,4 @@
-from pytectonics import Plate, Crust, GeoCoordinate, Hotspot, FibGrid
+from pytectonics import Plate, Crust, GeoCoordinate, FibGrid
 from pytectonics.utils import toCartesian
 from math import sqrt, pi, asin
 import random
@@ -32,10 +32,6 @@ class World:
                              random.gauss(42.8, 27.7),
                              toCartesian(self.randomPoint()))
                        for i in range(plateNum)]
-        self.hotspots = [Hotspot(self.randomPoint(), 
-                                 random.randint(hotspotHeat),
-                                 self, 2)
-                         for i in range(hotspotNum)]
         shields = [GeoCoordinate(self.randomPoint())
                    for i in range(continentNum)]
         continentSize = self.distanceToRadians(continentSize)
@@ -92,10 +88,6 @@ class World:
         for crust in self:
             crust.isostacy()
 
-    def tryErupt(self, timestep):
-        for hotspot in self.hotspots:
-            hotspot.tryErupt()
-
     def clean(self):
         for plate in self.plates:
             if not any([crust for crust in plate.grid 
@@ -112,5 +104,4 @@ class World:
         self.dock()
         self.rift()
         self.clean()
-        #self.tryErupt(timestep)
         self.age += timestep
