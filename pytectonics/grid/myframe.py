@@ -4,6 +4,7 @@ from numpy import array, asarray, sqrt, dot, cos, sin, cross
 def mag(v):
     return sqrt(dot(v, v))
 
+
 class MyFrame:
     """Reimplmenting most of what vPython did with the frame...
 
@@ -16,6 +17,10 @@ class MyFrame:
         self.up = array([0, 1, 0])
 
     def frame_to_world(self, a):
+        """ this is being used on line 150, in getCartesian so it needs to
+        be implemented
+
+        """
         return array([0, 0, 0])
 
     def world_zaxis(self):
@@ -39,11 +44,12 @@ class MyFrame:
     def rotate(self, *args, **kwargs):
         def rotation_matrix(axis, theta):
             """
-            Return the rotation matrix associated with counterclockwise rotation about
-            the given axis by theta radians.
+            Return the rotation matrix associated with counterclockwise rotation
+            about the given axis by theta radians.
 
             From:
             https://stackoverflow.com/questions/6802577/rotation-of-3d-vector
+
             """
             axis = asarray(axis)
             axis = axis / sqrt(dot(axis, axis))
@@ -55,5 +61,7 @@ class MyFrame:
                              [2 * (bc - ad), aa + cc - bb - dd, 2 * (cd + ab)],
                              [2 * (bd + ac), 2 * (cd - ab), aa + dd - bb - cc]])
 
-        rotated = dot(rotation_matrix(kwargs['axis'], kwargs['angle']), self.axis)
+        rotated = dot(rotation_matrix(kwargs['axis'],
+                                      kwargs['angle']),
+                      self.axis)
         self.axis = rotated
