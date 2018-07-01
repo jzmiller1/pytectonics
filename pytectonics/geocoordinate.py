@@ -17,17 +17,18 @@ class GeoCoordinate:
 
     def __dict__(self):
         return self.id
-    
+
     def _getSpherical(self):
-        if not self._spherical: 
+        if not self._spherical:
             self._spherical = toSpherical(self._cartesian)
         return self._spherical
 
     def _setSpherical(self, spherical):
         self._spherical = spherical
         self._cartesian = None
+
     spherical = property(_getSpherical, _setSpherical)
-    
+
     def _getCartesian(self):
         if self._cartesian is None:
             self._cartesian = toCartesian(self._spherical)
@@ -36,17 +37,18 @@ class GeoCoordinate:
     def _setCartesian(self, cartesian):
         self._cartesian = cartesian
         self._spherical = None
+
     cartesian = property(_getCartesian, _setCartesian)
-    
+
     def getArcDistance(self, other):
         """Returns distance between two points on a globe given in terms of distance.
         Correctly considers the curvature of the globe."""
         lat1, lon1 = self
         lat2, lon2 = other
-        latChange = abs(lat1-lat2)
-        lonChange = abs(lon1-lon2)
-        return 2 * asin(sqrt(sin(latChange/2) ** 2 + \
-                             cos(lat1) * cos(lat2) * sin(lonChange/2) ** 2))
+        latChange = abs(lat1 - lat2)
+        lonChange = abs(lon1 - lon2)
+        return 2 * asin(sqrt(sin(latChange / 2) ** 2 + \
+                             cos(lat1) * cos(lat2) * sin(lonChange / 2) ** 2))
 
     def getDistance(self, other):
         """Returns distance between two points """
@@ -69,8 +71,8 @@ class GeoCoordinate:
             aa, bb, cc, dd = a * a, b * b, c * c, d * d
             bc, ad, ac, ab, bd, cd = b * c, a * d, a * c, a * b, b * d, c * d
             return array([[aa + bb - cc - dd, 2 * (bc + ad), 2 * (bd - ac)],
-                             [2 * (bc - ad), aa + cc - bb - dd, 2 * (cd + ab)],
-                             [2 * (bd + ac), 2 * (cd - ab), aa + dd - bb - cc]])
+                          [2 * (bc - ad), aa + cc - bb - dd, 2 * (cd + ab)],
+                          [2 * (bd + ac), 2 * (cd - ab), aa + dd - bb - cc]])
 
         axis = eulerPole
         theta = angularSpeed

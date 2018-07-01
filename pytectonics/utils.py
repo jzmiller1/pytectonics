@@ -10,40 +10,41 @@ RIGHT_ANGLE = pi / 2
 SEMICIRCLE = pi
 CIRCLE = pi * 2
 phi = 1.61803398874989484820
-sqrt5 = sqrt(5) 
+sqrt5 = sqrt(5)
 # So why is sqrt(5) a constant?
 # 1.) It has an intrinsic relation to phi in
 #    what makes it very similar to other mathematical constants
 # 2.) It produces tangible gains in efficiency
 
 SEC_IN_MIN = 60.
- 
+
+
 # supportive math function not implemented in the math library
-def fib(n): 
+def fib(n):
     """Returns an approximation of the nth fibonacci number"""
-    return int(round(phi**n/sqrt5))
+    return int(round(phi ** n / sqrt5))
 
 
 def sign(n):
     """Returns 1 for positive, -1 for negative, and 0 for 0"""
-    return copysign(1,n)
+    return copysign(1, n)
 
 
 def getLonDistance(angle1, angle2):
     """Returns angular distance of two angles"""
-    return (angle1-angle2+ CIRCLE) % CIRCLE
+    return (angle1 - angle2 + CIRCLE) % CIRCLE
 
 
 def bound(x, floor, ceil):
-    return max(min(x, ceil),floor)
+    return max(min(x, ceil), floor)
 
 
 def toCartesian(spherical):
     """Converts lat lon coordinates to cartesian"""
     lat, lon = spherical
-    return array([cos(lat)*cos(lon),
+    return array([cos(lat) * cos(lon),
                   sin(lat),
-                  -cos(lat)*sin(lon)])
+                  -cos(lat) * sin(lon)])
 
 
 def toSpherical(cartesian):

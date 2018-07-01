@@ -13,6 +13,7 @@
      Let 1 plate split apart sometimes
      Astroblemes
    x Take density of rock into account
+
 """
 
 from pytectonics.world import World
@@ -21,9 +22,8 @@ from pytectonics.grid.fibgrid import FibGrid
 import cProfile
 
 # initialize world
-world = World(radius=6367, resolution=360/5, 
-              plateNum=7, 
-              hotspotNum=0, hotspotHeat=0, 
+world = World(radius=6367, resolution=360 / 5,
+              plateNum=7,
               continentNum=3, continentSize=1250,
               Grid=FibGrid)
 
@@ -43,7 +43,7 @@ def main():
 def benchmark():
     for i in range(50):
         world.update(1.0)
-        
-        
+
+
 main()
-#cProfile.run('benchmark()')
+# cProfile.run('benchmark()')

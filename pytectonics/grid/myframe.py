@@ -11,6 +11,7 @@ class MyFrame:
     https://github.com/vpython/visual/blob/e856d1b89d8ab0484409f4be7931326ed546e9a2/src/core/frame.cpp
 
     """
+
     def __init__(self):
         self.axis = array([1, 0, 0])
         self.pos = array([0, 0, 0])
@@ -58,8 +59,8 @@ class MyFrame:
             aa, bb, cc, dd = a * a, b * b, c * c, d * d
             bc, ad, ac, ab, bd, cd = b * c, a * d, a * c, a * b, b * d, c * d
             return array([[aa + bb - cc - dd, 2 * (bc + ad), 2 * (bd - ac)],
-                             [2 * (bc - ad), aa + cc - bb - dd, 2 * (cd + ab)],
-                             [2 * (bd + ac), 2 * (cd - ab), aa + dd - bb - cc]])
+                          [2 * (bc - ad), aa + cc - bb - dd, 2 * (cd + ab)],
+                          [2 * (bd + ac), 2 * (cd - ab), aa + dd - bb - cc]])
 
         rotated = dot(rotation_matrix(kwargs['axis'],
                                       kwargs['angle']),
