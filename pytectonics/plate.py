@@ -275,7 +275,7 @@ class Plate(GeoCoordinate):
             collidable = [collidable] if collidable else plates
 
             cartesian = self.grid.getCartesian(id)
-            collision = self.getCollisions(cartesian, collidable).next()
+            collision = next(self.getCollisions(cartesian, collidable))
             if not collision:
                 Crust(self, self.world, False, id)
                 self._collisions[id] = None
@@ -290,8 +290,8 @@ class Plate(GeoCoordinate):
         for crust in self.collidable:
             collidable = self._collisions[crust.id]
             collidable = [collidable] if collidable else plates
-            collision = self.getCollisions(crust.cartesian,
-                                           collidable, approx=True).next()
+            collision = next(self.getCollisions(crust.cartesian,
+                                                collidable, approx=True))
             if collision:
                 self.trackCollisions(crust.id, collision.plate)
                 collision.plate.trackCollisions(collision.id, self)

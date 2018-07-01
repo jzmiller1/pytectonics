@@ -22,7 +22,11 @@ class MyFrame:
         be implemented
 
         """
-        return array([0, 0, 0])
+        z = array([0, 0, self.world_zaxis()])
+        part = cross(z, self.axis)
+        y = part / sqrt(dot(part, part))
+        x = self.axis / sqrt(dot(self.axis, self.axis))
+        return self.pos + a[0]*x + a[1] * y + a[2] * z
 
     def world_zaxis(self):
         if dot(self.axis, self.up) / sqrt(mag(self.up) * mag(self.axis)) > 0.98:
