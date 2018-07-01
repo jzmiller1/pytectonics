@@ -1,5 +1,5 @@
 from .geocoordinate import GeoCoordinate
-from .grid import FibGrid, SkippedGrid
+from .grid import FibGrid
 from .crust import Crust
 from .plate import Plate
 from .world import World
