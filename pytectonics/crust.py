@@ -92,7 +92,7 @@ class Crust(GeoCoordinate):
     
     def _getDensity(self):
         return self.pressure / self.thickness
-    density = property(_getDensity)
+    # density = property(_getDensity)
     
     def _getElevation(self):
         return self.displacement - self.world.seaLevel
@@ -119,7 +119,8 @@ class Crust(GeoCoordinate):
         displacement = thickness - rootDepth 
         #if self.elevation < 0: displacement + self.elevation
         
-        
+
+
         #calculates eustacy of oceans
         #if self.elevation < 0:
         #    displacedWater = min(displacement, self.world.seaLevel) - self.displacement 

@@ -38,7 +38,7 @@ def main():
             print(plate._cartesian)
             print(plate._spherical)
 def benchmark():
-    for i in xrange(50):
+    for i in range(50):
         world.update(1.0)
         
         

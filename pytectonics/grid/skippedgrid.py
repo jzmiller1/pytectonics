@@ -40,14 +40,17 @@ class SkippedGrid:
         if j <= self.numLat: j *= sign(lat)
         id =  int(round(i)), int(j)
         return id
-    def _getLat(self, (i,j)):
+    def _getLat(self, coord):
+        i,j=coord
         return (pi/2)*(1-float(abs(j))/self.numLat) * sign(j)
-    def _getLon(self, (i,j)):
+    def _getLon(self, coord):
+        i,j=coord
         return (pi/2)*(float(i)/float(abs(j)))%(2*pi)
     def getCoordinates(self, index):
         return (self._getLat(index), self._getLon(index))
-    def getNeighborCells(self, (i,j), iOffsets=[-1, 0, 1], jOffsets=[-1,0,1]):
+    def getNeighborCells(self, coord, iOffsets=[-1, 0, 1], jOffsets=[-1,0,1]):
         '''Returns indices occupying cells neighboring the cell specified by index.'''
+        i,j = coord
         for iOffset, jOffset in itertools.product(iOffsets, jOffsets):
             jnew = j+jOffset
             if jnew == 0: continue

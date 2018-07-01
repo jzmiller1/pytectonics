@@ -19,7 +19,7 @@ class Plate(GeoCoordinate):
         
         self._collidable = None
         self._riftable = None
-        self._collisions = [None for i in xrange(0, self.grid.totalPointNum)]
+        self._collisions = [None for i in range(0, self.grid.totalPointNum)]
         self._docking = set()
         
         #density offsets are needed so that crust of one plate always subducts
@@ -207,7 +207,7 @@ class Plate(GeoCoordinate):
             #if all other efforts fails, replace existing crust
             if self.grid[id]:
                 if self.grid[id] in self._docking:
-                    print 'overwriting'
+                    print('overwriting')
                 self.grid[id].destroy()
             
             crust.copy(self, id)
@@ -271,7 +271,7 @@ class Plate(GeoCoordinate):
     def clean(self):
         self._collidable = None
         self._riftable   = None
-        self._collisions =[None for i in xrange(0, self.grid.totalPointNum)]
+        self._collisions =[None for i in range(0, self.grid.totalPointNum)]
         
     def destroy(self):
         self.world.plates.remove(self)

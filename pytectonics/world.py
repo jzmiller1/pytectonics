@@ -28,13 +28,13 @@ class World:
         self.plates = [Plate(GeoCoordinate(self.randomPoint()), self,
                              Grid(avgPointDistance, mapping=template.mapping), 
                              random.gauss(42.8, 27.7), toCartesian(self.randomPoint()))
-                       for i in xrange(plateNum)]
+                       for i in range(plateNum)]
         self.hotspots = [Hotspot(self.randomPoint(), 
                                  random.randint(hotspotHeat),
                                  self, 2)
-                         for i in xrange(hotspotNum)]
+                         for i in range(hotspotNum)]
         shields = [GeoCoordinate(self.randomPoint())
-                   for i in xrange(continentNum)]
+                   for i in range(continentNum)]
         continentSize = self.distanceToRadians(continentSize)
 
         for i in template.getIndices():

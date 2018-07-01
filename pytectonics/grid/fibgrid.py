@@ -1,7 +1,7 @@
 from math import log, sqrt, pi, sin, cos, asin
-from cartesianarray import CartesianArray
+from .cartesianarray import CartesianArray
 from pytectonics.utils import CIRCLE, SEMICIRCLE, sqrt5, phi, getLonDistance, fib, bound, toCartesian, toSpherical
-from myframe import MyFrame
+from .myframe import MyFrame
 
 class FibGrid:
     '''Represents a grid of evenly distributed cells upon a sphere.
@@ -38,7 +38,7 @@ class FibGrid:
         self.totalPointNum = 2*self.pointNum+1
         self.zIncrement = 2.0 / self.totalPointNum
         
-        self.coverage = [None for i in xrange(0, self.totalPointNum)]
+        self.coverage = [None for i in range(0, self.totalPointNum)]
         
         self.resolution = 5
         if not mapping:
@@ -51,7 +51,7 @@ class FibGrid:
                 
         self.frame = MyFrame()
         
-        self.points = [None for i in xrange(0, self.totalPointNum)]
+        self.points = [None for i in range(0, self.totalPointNum)]
         for i in self.getIndices():
             self.points[i] = toCartesian(self._getSpherical(i))
             
@@ -84,7 +84,7 @@ class FibGrid:
         cart_world_to_frame = self.frame.world_to_frame(cartesian)
         spherical = toSpherical(cart_world_to_frame)
         return int(self.mapping.array[self.mapping.posToId(spherical)])
-    def _getIndex(self, (lat, lon)):
+    def _getIndex(self, coord):
         '''Returns the approximate index of the coordinates given.
         The position of the index appears to always be at least 
         a neighbor to the correct one.
@@ -94,7 +94,7 @@ class FibGrid:
         and lacks theoretical grounding. 
         To compensate, documentation here will be generous.
         BLACK MAGIC BEGINS HERE'''
-        
+        lat, lon = coord
         #find the closest index in terms of latitude 
         z = sin(lat)
         index = self._getZoneIndex(z, round)
@@ -109,7 +109,7 @@ class FibGrid:
         #this is done with an algorithm that converts 
         #the fraction of longitude offset to base-phi or "phinary"
         remainder = getLonDistance(self._getLon(index), lon)/CIRCLE
-        for k in xrange(1, abs(zone+1)):
+        for k in range(1, abs(zone+1)):
             remaindertemp = (remainder*phi)
             remainder = remaindertemp % 1.0
             if abs(remaindertemp) > 1.0:
@@ -140,7 +140,7 @@ class FibGrid:
     
     #---PROXIMITY METHODS
     def getIndices(self):
-        return xrange(-self.pointNum,self.pointNum+1)
+        return range(-self.pointNum,self.pointNum+1)
     
     def _getCellNeighborId(self, index, sign, zone):
         return bound(index + sign*fib(zone), -self.pointNum, self.pointNum)
